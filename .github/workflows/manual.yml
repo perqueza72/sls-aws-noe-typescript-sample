@@ -1,0 +1,26 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+    inputs:
+      branch:
+
+        description: 'Branch deploying from'
+        default: 'main'
+        required: true
+        type: string
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  deploy-serverless:
+    runs-on: runs-on,runner=16cpu-linux-x64
+
+    steps:
+      - run: npm install
+      - run: npm run sls deploy --stage='utring'
